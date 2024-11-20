@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Todo from "./components/todo/Todo";
+import AddTodo from "./components/todo/AddTodo";
 
 export default function App() {
   const todoItemList = [
@@ -30,10 +31,18 @@ export default function App() {
   };
 
   return (
-    <ul>
-      {todoList.map((todo) => (
-        <Todo key={todo.id} todo={todo} onClickDoneHandler={onDoneHandler} />
-      ))}
-    </ul>
+    <>
+      <h4>
+        완료: {todoList.filter((todo) => todo.isDone).length} / 미완료:{" "}
+        {todoList.filter((todo) => !todo.isDone).length}
+      </h4>
+      <ul>
+        {todoList.map((todo) => (
+          <Todo key={todo.id} todo={todo} onClickDoneHandler={onDoneHandler} />
+        ))}
+      </ul>
+      {/* 일정추가 */}
+      <AddTodo setTodoList={setTodoList} />
+    </>
   );
 }
